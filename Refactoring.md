@@ -19,5 +19,5 @@ I made the following changes to the function:
 5. Code is more fast because it returns values as soon as possible instead of processing other blocks of code which isn't required
 
 Below is screenshot of ``npm test``
-
+![Preview Image](https://i.imgur.com/zIdq0eA.png)
 My version of the code is more readable because it uses fewer variables and fewer if statements, making it easier to understand what the function does and how it does it. The added comments also help to explain the code and newly added 9 unit tests ensure that the refactored code still works as expected.
