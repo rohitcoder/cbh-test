@@ -48,4 +48,10 @@ describe("deterministicPartitionKey", () => {
     expect(deterministicPartitionKey(event)).toEqual(hash);
   });
 
+  it("returns sha3-512 hash of array when event is an array", () => {
+    const event = [1, 2, 3];
+    const hash = crypto.createHash("sha3-512").update(JSON.stringify(event)).digest("hex");
+    expect(deterministicPartitionKey(event)).toEqual(hash);
+  });
+
 });
