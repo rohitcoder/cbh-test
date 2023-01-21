@@ -30,4 +30,22 @@ describe("deterministicPartitionKey", () => {
     const hash = crypto.createHash("sha3-512").update(JSON.stringify(partitionKey)).digest("hex");
     expect(deterministicPartitionKey({ partitionKey })).toEqual(hash);
   });
+
+  it("returns event.partitionKey when it is a string and exactly 256 characters", () => {
+    const longPartitionKey = "a".repeat(256);
+    expect(deterministicPartitionKey({ partitionKey: longPartitionKey })).toEqual(longPartitionKey);
+  });
+
+  it("returns sha3-512 hash of empty object when event is an empty object", () => {
+    const event = {};
+    const hash = crypto.createHash("sha3-512").update(JSON.stringify(event)).digest("hex");
+    expect(deterministicPartitionKey(event)).toEqual(hash);
+  });
+
+  it("returns sha3-512 hash of number when event is a number", () => {
+    const event = 123;
+    const hash = crypto.createHash("sha3-512").update(JSON.stringify(event)).digest("hex");
+    expect(deterministicPartitionKey(event)).toEqual(hash);
+  });
+
 });
