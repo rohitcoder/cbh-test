@@ -18,4 +18,4 @@ I made the following changes to the function:
 4. I added a default return value of "0" for the case when event is null, this is useful so that function does not throw an error
 5. Code is more fast because it returns values as soon as possible instead of processing other blocks of code which isn't required
 
-My version of the code is more readable because it uses fewer variables and fewer if statements, making it easier to understand what the function does and how it does it. The added comments also help to explain the code and newly added 5 unit tests ensure that the refactored code still works as expected.
+My version of the code is more readable because it uses fewer variables and fewer if statements, making it easier to understand what the function does and how it does it. The added comments also help to explain the code and newly added 8 unit tests ensure that the refactored code still works as expected.
