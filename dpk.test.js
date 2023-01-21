@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const { deterministicPartitionKey } = require("./dpk");
 
 describe("deterministicPartitionKey", () => {
@@ -21,5 +22,12 @@ describe("deterministicPartitionKey", () => {
     const event = { a: 1, b: 2 };
     const hash = crypto.createHash("sha3-512").update(JSON.stringify(event)).digest("hex");
     expect(deterministicPartitionKey(event)).toEqual(hash);
+  });
+
+  // test case for when event.partitionKey is not a string or more than 256 characters
+  it("returns sha3-512 hash of partitionKey when partitionKey is not a string or more than 256 characters", () => {
+    const partitionKey = { a: 1, b: 2 };
+    const hash = crypto.createHash("sha3-512").update(JSON.stringify(partitionKey)).digest("hex");
+    expect(deterministicPartitionKey({ partitionKey })).toEqual(hash);
   });
 });
