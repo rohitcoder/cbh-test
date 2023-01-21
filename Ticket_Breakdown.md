@@ -23,7 +23,7 @@ You will be graded on the level of detail in each ticket, the clarity of the exe
 
 **Acceptance Criteria**:
 
-1. The database should have a new field in the Agents table to store multiple custom Agent ID, provided by the multiple facilities.
+1. The database should have a new field in the Agents table to store multiple custom Agent ID, provided by the multiple facilities, in each agent's record.
 2. The database should support saving and retrieving the custom Agent ID for each Agent against each Facility
 
 **Time/Effort Estimate**: 2 hours
