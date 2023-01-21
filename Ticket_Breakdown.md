@@ -101,8 +101,10 @@ Implementation Details:
 2. If we detect, facility user passed custom Id then we will have another internal function which takes 2 argument custom_id and facility_id. Function will look like getInternalDbIdFromAgentCustomID(custom_id -> interanl_db_id.
 3. Since, we already prepared entire logic using internal db_id and this is new feature request, we want to ensure we don't re-work on existing stuff which is already working, so everytime we will try to fetch default internal id from custom id at backend and we will use that everywhere. So, we will just add a new logic to fetch internal db id if custom_id is passed.
 4. The report generated should be consistent with the new format (Notice: We are having custom_id as an extra key but we still using internal db id). We can have another api to get agentDetail by id which also accepts both kind of ids. In this way, we are ensuring we're not doing major changes and we're also delievering what client is expecting
+
 **Example data** 
 This is example report response when facility user passes "ABC_JOHN_THIS_IS_CUSTOM_ID" (custom_id) in ``generateReport()`` function
+
 ```json
 {
     "quarter": "Q1 2022",
@@ -113,8 +115,9 @@ This is example report response when facility user passes "ABC_JOHN_THIS_IS_CUST
         "hours": 40
     }
 }
-
+```
 This is example resport response when facility user passes Default internal id in ``generatereport()`` function (notice this user is not having any custom_id, so we returned a blank value or we can return null)
+
 ```json
 {
     "quarter": "Q1 2022",
