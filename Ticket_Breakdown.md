@@ -100,27 +100,34 @@ Implementation Details:
 1. The generateReport function should support both internal database id or custom_id in same function argument (We need to check in backend whether provided value is something like ObjectId or a simple string, to understand what kind of id facility is passing)
 2. If we detect, facility user passed custom Id then we will have another internal function which takes 2 argument custom_id and facility_id. Function will look like getInternalDbIdFromAgentCustomID(custom_id -> interanl_db_id.
 3. Since, we already prepared entire logic using internal db_id and this is new feature request, we want to ensure we don't re-work on existing stuff which is already working, so everytime we will try to fetch default internal id from custom id at backend and we will use that everywhere. So, we will just add a new logic to fetch internal db id if custom_id is passed.
-4. The report generated should be consistent with the new format (Notice: We are having custom_id and internal db_id both in same field "id"). We can have another api to get agentDetail by id which also accepts both kind of ids
-
-**Example data**:
-
+4. The report generated should be consistent with the new format (Notice: We are having custom_id as an extra key but we still using internal db id). We can have another api to get agentDetail by id which also accepts both kind of ids. In this way, we are ensuring we're not doing major changes and we're also delievering what client is expecting
+**Example data** 
+This is example report response when facility user passes "ABC_JOHN_THIS_IS_CUSTOM_ID" (custom_id) in ``generateReport()`` function
 ```json
 {
     "quarter": "Q1 2022",
-    "agents": [
-        {   
-            id: "ABC_JOHN_THIS_IS_CUSTOM_ID"
-            "name": "John Doe",
-            "hours": 40
-        },
-        {
-            "id": "63c6dffae211d5782a9d25bf",
-            "name": "Sara",
-            "hours": 20
-        }
-    ]
+    "agent": {   
+        "id": "63c6dffae211d5783a9d25bf",
+        "custom_id": "ABC_JOHN_THIS_IS_CUSTOM_ID",
+        "name": "John Doe",
+        "hours": 40
+    }
+}
+
+This is example resport response when facility user passes Default internal id in ``generatereport()`` function (notice this user is not having any custom_id, so we returned a blank value or we can return null)
+```json
+{
+    "quarter": "Q1 2022",
+    "agent": {
+        "id": "63c6dffae211d5782a9d25bf",
+        "custom_id": "",
+        "name": "Sara",
+        "hours": 20
+    }
 }
 ```
+
+Our main focus in this entire challenge was re-using existing logic and just doing minor change to support custom_ids
 
 ### Ticket 4: Update the UI to accept custom Agent IDs
 
